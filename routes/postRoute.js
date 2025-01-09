@@ -6,8 +6,12 @@ const {
   createPost,
   updatePost,
   deletePost,
+  getUserPosts,
 } = require("../controllers/postController.js");
+
 const { verifyToken } = require("../middleware/authMiddleware");
+
+router.get("/user-posts", verifyToken, getUserPosts);
 
 router.get("/", getPosts);
 

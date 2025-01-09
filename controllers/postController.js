@@ -78,10 +78,25 @@ const deletePost = async (req, res) => {
   }
 };
 
+const getUserPosts = async (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    const posts = await Post.find({ author: req.user.username });
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 module.exports = {
   getPosts,
   getPost,
   createPost,
   updatePost,
   deletePost,
+  getUserPosts,
 };
