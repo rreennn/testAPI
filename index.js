@@ -2,10 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const authRoute = require("./routes/authRoute.js");
 const postRoute = require("./routes/postRoute.js")
+const cors = require('cors');
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({extended: false}));
 
 app.use("/api/posts", postRoute);
